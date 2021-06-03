@@ -8,7 +8,7 @@
 
 在进行 `EedgerOS` 前后端交互时，需要使用 `EedgerOS` 安全接口，前端 引入 `@edgeros/web-sdk` 包， 前端交互接口一般需要加入 `token` 、`srand` 字段， 关于 `EedgerOS` 安全机制参考 `API` 手册 【SDK/Security】。
 
-本章所涉及示例代码在 `eap-demo-interactive` 工程中，工程地址：【 https://gitee.com/edgeros/eap-demo-interactive.git 】。
+本章所涉及示例代码在 `eap-demo-interactive` 工程中，工程地址：【 https://gitee.com/edgeros/eap-demo-interactive.git 】或 【 https://github.com/edgeros/eap-demo-interactive.git 】。
 
 【[RESTFul](./doc/RESTFul.md)】
 【[Socket.io](./doc/Socket.io.md)】
