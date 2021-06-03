@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>socketio demo</title>
+    <script src="./vue/vue.min.js"></script>
+    <script src="./socketio/socket.io.js"></script>
+    <script src="./websdk/sdk.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <a href="./index.html">返回</a>
+        <h1>socketio 协议</h1>
+        <hr/>
+        <div>
+            <div>
+                <textarea cols="30" rows="10" v-model="message">
+                </textarea>
+            </div>
+            <button @click="send()">发送</button>
+        </div>
+        <hr/>
+        <span>回复</span>
+        <br>
+        <textarea cols="30" rows="10" v-model="response">
+        </textarea>
+       <hr/>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                socket: null,
+                message: '',
+                response: '',
+                token: '',
+				srand: ''
+            },
+            methods: {
+                send: function() {
+                    this.socket.emit('message', this.message, (response) => {
+                        this.response = response;
+                    });
+                },
+                initSocket: function() {
+                    const auth = {
+                        'edger-token': this.token,
+                        'edger-srand': this.srand
+                    };
+                    this.socket = io({
+                        query: auth
+                    });
+                    this.socket.on('connect', () => {
+                        console.log('已连接！');
+                    });
+                },
+                initAuth(){
+					edger.token().then((res) => {
+						this.token = res.token;
+						this.srand = res.srand;
+                        this.initSocket();					
+					}).catch((error) => {
+						console.log(error);
+					});
+					edger.onAction('token', (res) => {
+						this.token = res.token;
+						this.srand = res.srand;	
+					});
+				}
+            },
+            created (){
+                this.initAuth();
+            }
+        });
+    </script>
+    <style>
+        html{
+            height: 100%;
+            background-color: #ffffff;
+        }
+    </style>
+  </body>
+</html>

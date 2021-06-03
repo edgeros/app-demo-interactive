@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>synctable demo</title>
+    <script src="./vue/vue.min.js"></script>
+    <script src="./synctable/synctable.min.js"></script>
+    <script src="./websdk/sdk.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <a href="./index.html">返回</a>
+        <div>
+            <label>
+                key
+            </label>
+            <input type="text" v-model="key" />
+            <br>
+            <label>
+                value
+            </label>
+            <input type="text" v-model="value" />
+        </div>
+        <div>
+            <button @click="set()">set</button>
+        </div>
+        <div>
+            <button @click="get()">get</button>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                table: null,
+                key: '',
+                value: '',
+                token: '',
+                srand: ''
+            },
+            methods: {
+                set: function () {
+                    this.table.set(this.key, this.value).then(v => {
+                        console.log('ok');
+                    }).catch(e => {
+                        console.error('set error!');
+                    });
+                },
+                get: function () {
+                    this.table.get(this.key).then(value => {
+                        console.log('k1 value is:', value);
+                        this.value = value;
+                    }).catch(error => {
+                        console.error('get k1 value error!');
+                    });
+                },
+                initSynctable: function () {
+                    var proto = location.protocol === 'http:' ? 'ws:' : 'wss:';
+                    var server = `${proto}//${window.location.host}`;
+
+                    const auth = {
+                        'edger-token': this.token,
+                        'edger-srand': this.srand
+                    };
+
+                    this.table = new SyncTable(server, 'table1', auth);
+                    this.table.addEventListener('update', function (key, value) {
+                        this.key = key;
+                        this.value = value;
+                    });
+                },
+                initAuth() {
+                    edger.token().then((res) => {
+                        this.token = res.token;
+                        this.srand = res.srand;
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                    edger.onAction('token', (res) => {
+                        this.token = res.token;
+                        this.srand = res.srand;
+                    });
+                }
+            },
+            created() {
+                this.initAuth();
+                this.initSynctable();
+            }
+        });
+    </script>
+    <style>
+        html {
+            height: 100%;
+            background-color: #ffffff;
+        }
+    </style>
+</body>
+
+</html>
