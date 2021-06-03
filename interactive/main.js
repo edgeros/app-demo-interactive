@@ -1,7 +1,7 @@
 #! /bin/javascript
 
 /*
- * Copyright (c) 2020 EdgerOS Team.
+ * Copyright (c) 2021 EdgerOS Team.
  * All rights reserved.
  *
  * Detailed license information can be found in the LICENSE file.
@@ -13,18 +13,12 @@
  */
 const Web = require('webapp');
 const bodyParser = require('middleware').bodyParser;
-const iosched = require('iosched');
-
-/* Whether the app was awakened by a shared message */
-if (ARGUMENT != undefined) {
-	console.log('Awakened by share message:', ARGUMENT);
-}
 
 /* Create web server */
-const app = Web.createApp();
+var app = Web.createApp();
 app.use(bodyParser.json());
 app.use(Web.static('./public', { index: ['index.html', 'index.htm'] }));
-app.use('/', require('./routers'));
+app.use('/', require('./routers/rest'));
 app.start();
 
 /**
@@ -38,8 +32,7 @@ var server = new WebSyncTable(app, table);
 /**
  * Create socketio
  */
-var io = require('socket.io')
-var socketio = io(
+var io = require('socket.io')(
 	app, {
 		serveClient: false,
 		pingInterval: 10000,
@@ -47,13 +40,11 @@ var socketio = io(
 	}
 );
 
-socketio.on('connection', function(sockio) {
+io.on('connection', function(sockio) {
 	sockio.on('message', (msg, callback) => {
 		callback(`server: ${msg}`);
 	});
 });
 
-/*
- * Event loop
- */
-iosched.forever();
+/* Event loop */
+require('iosched').forever();

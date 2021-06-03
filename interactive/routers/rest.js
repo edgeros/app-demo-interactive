@@ -9,8 +9,7 @@
  * Author: Li.Ping <liping@acoinfo.com>
  *
  */
-const WebApp = require('webapp');
-const Router = WebApp.Router;
+const Router = require('webapp').Router;
 const router = Router.create();
 
 var users = [];

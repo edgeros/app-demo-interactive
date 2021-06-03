@@ -36,6 +36,7 @@
             <button @click="getUsers()">查询</button>
             <br />
             <textarea cols="40" rows="10" :value="responseJson">
+
            </textarea>
         </div>
     </div>
@@ -52,7 +53,7 @@
             },
             methods: {
                 addUser: function () {
-                    const auth = {
+                    let auth = {
                         'edger-token': this.token,
                         'edger-srand': this.srand
                     };
@@ -66,7 +67,7 @@
                         });
                 },
                 getUsers: function () {
-                    const auth = {
+                    let auth = {
                         'edger-token': this.token,
                         'edger-srand': this.srand
                     };
@@ -84,7 +85,7 @@
 						this.token = res.token;
 						this.srand = res.srand;					
 					}).catch((error) => {
-						console.log(error);
+						// ...
 					});
 					edger.onAction('token', (res) => {
 						this.token = res.token;

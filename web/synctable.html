@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>synctable demo</title>
     <script src="./vue/vue.min.js"></script>
-    <script src="./synctable/synctable.min.js"></script>
+    <script src="./synctable/synctable.js"></script>
     <script src="./websdk/sdk.min.js"></script>
 </head>
 
@@ -58,15 +58,16 @@
                     });
                 },
                 initSynctable: function () {
-                    var proto = location.protocol === 'http:' ? 'ws:' : 'wss:';
-                    var server = `${proto}//${window.location.host}`;
+                    let proto = location.protocol === 'http:' ? 'ws:' : 'wss:';
+                    let server = `${proto}//${window.location.host}`;
 
-                    const auth = {
-                        'edger-token': this.token,
-                        'edger-srand': this.srand
+                    let auth = {
+                        token: this.token,
+                        srand: this.srand
                     };
 
                     this.table = new SyncTable(server, 'table1', auth);
+                    console.log(this.table);
                     this.table.addEventListener('update', function (key, value) {
                         this.key = key;
                         this.value = value;
@@ -76,6 +77,8 @@
                     edger.token().then((res) => {
                         this.token = res.token;
                         this.srand = res.srand;
+                        console.log(this.token);
+                        this.initSynctable();
                     }).catch((error) => {
                         console.log(error);
                     });
@@ -87,7 +90,6 @@
             },
             created() {
                 this.initAuth();
-                this.initSynctable();
             }
         });
     </script>

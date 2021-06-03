@@ -44,7 +44,7 @@
                     });
                 },
                 initSocket: function() {
-                    const auth = {
+                    let auth = {
                         'edger-token': this.token,
                         'edger-srand': this.srand
                     };
@@ -61,7 +61,7 @@
 						this.srand = res.srand;
                         this.initSocket();					
 					}).catch((error) => {
-						console.log(error);
+						// ...
 					});
 					edger.onAction('token', (res) => {
 						this.token = res.token;
