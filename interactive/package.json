@@ -1,6 +1,6 @@
 {
     "name": "com.acoinfo.interactive",
-    "version": "0.0.15",
+    "version": "0.0.19",
     "description": "前后端交互案例",
     "main": "main.js",
     "scripts": {

@@ -22,10 +22,10 @@
         "reside": false,
         "mesv": "1.0.0"
     },
-    "loading":{
-        "splash":"splash",
-        "background":"#000000",
-        "animation":"enlarge"
+    "loading": {
+        "splash": "splash",
+        "background": "#000000",
+        "animation": "enlarge"
     },
     "vendor": {
         "id": "10027",
@@ -41,7 +41,7 @@
     },
     "widget": [
         {
-            "ico": "ico_widget",
+            "ico": "widget.png",
             "name": "My Widget",
             "path": "widget",
             "rows": 2,
