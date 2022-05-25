@@ -1,8 +1,9 @@
-前后端交互参考指南： https://www.edgeros.com/edgeros/guide/tutorial_adv/basic_overview.html
+前端开发参考指南： https://www.edgeros.com/edgeros/guide/frontend/overview.html
 
-`RESTful`入门 参考指南：https://www.edgeros.com/edgeros/guide/tutorial_adv/basic_rest.html
+后端开发参考指南： https://www.edgeros.com/edgeros/guide/backend/overview.html
 
-`Socket.IO` 入门参考指南：https://www.edgeros.com/edgeros/guide/tutorial_adv/basic_socketio.html
+RESTful入门 参考指南：https://www.edgeros.com/edgeros/guide/backend/restful.html
 
-`WebSyncTable` 入门参考指南：https://www.edgeros.com/edgeros/guide/tutorial_adv/basic_websynctable.html
+Socket.IO 入门参考指南：https://www.edgeros.com/edgeros/guide/backend/socket_io.html
 
+WebSyncTable 入门参考指南：https://www.edgeros.com/edgeros/guide/backend/web_sync_table.html
