@@ -3,7 +3,8 @@
     "bundleid": "com.acoinfo.interactive",
     "ignore_modules": [
         "@edgeros/eslint-plugin-jsre",
-        "@edgeros/jsre-types"
+        "@edgeros/jsre-types",
+        "@edgeros/cli"
     ],
     "ignore_path": [
         "./test/**",
